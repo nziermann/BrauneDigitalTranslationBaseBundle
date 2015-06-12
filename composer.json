@@ -1,0 +1,30 @@
+{
+    "name" : "braune-digital/translation-base-bundle",
+    "description" : "TranslationBase bundle",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Braune Digital GmbH",
+        "email" : "mail@braune-digital.com"
+    }],
+    "keywords" : [
+        "translation translation-base bundle"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-4" : {
+            "BrauneDigital\\TranslationBaseBundle\\" : ""
+        }
+    },
+    "repositories" : [{
+    	
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "master-dev"
+        }
+    }
+}
