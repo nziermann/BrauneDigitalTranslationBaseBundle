@@ -1,0 +1,13 @@
+BrauneDigital\TranslationBaseBundle\Entity\LanguageTranslation:
+    type: entity
+    table: bd_translationbase_language_translation
+    id: {  }
+    fields:
+        title:
+            type: string
+            scale: 0
+            length: 128
+            unique: false
+            nullable: true
+            precision: 0
+    lifecycleCallbacks: {  }
