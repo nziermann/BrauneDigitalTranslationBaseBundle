@@ -18,13 +18,14 @@ class LanguageAdmin extends TranslationAdmin
 
         $formMapper
 			->add('translations', 'a2lix_translations', array(
+                'locales' => $this->currentLocale,
+                'required_locales' => $this->currentLocale,
 				'fields' => array(
 					'title' => array(
 						'field_type' => 'text',
 						'label' => 'Title',
-						'empty_data' => '',
-						'locale_options' => $localeOptions
-					),
+						'empty_data' => ''
+					)
 				)
 			), array(
 				'label' => ''
@@ -36,7 +37,7 @@ class LanguageAdmin extends TranslationAdmin
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper;
+        //$datagridMapper;
     }
 
     // Fields to be shown on lists
