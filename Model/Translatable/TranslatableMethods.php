@@ -6,9 +6,29 @@ namespace BrauneDigital\TranslationBaseBundle\Model\Translatable;
 trait TranslatableMethods
 {
 
-    protected function proxyCurrentLocaleTranslation($method, array $arguments = [])
+    protected function proxyCurrentLocaleTranslation($method, array $arguments = array())
     {
 
+		/**
+		 *
+		 * Check for elastica multilanguage fields
+		 */
+		$methodArray = explode('_', $method);
+		if (count($methodArray) > 1) {
+			if ($methodArray[1] == 'locale' && strlen($methodArray[2]) == 2) {
+				if (substr($method, 0, 3) != 'get' && substr($method, 0, 3) != 'set') {
+					$methodArray[0] = 'get' . ucfirst($methodArray[0]);
+				}
+				return call_user_func_array(
+					[$this->translate(), $methodArray[0]],
+					$arguments
+				);
+			}
+		}
+
+		/**
+		 * Check for slugs
+		 */
 		if ($method == 'slug' || $method == 'getSlug') {
 			$slug = $this->translate()->getSlug();
 			if ($slug) {
