@@ -120,9 +120,9 @@ trait TranslatableMethods
 			}
 
 		}
-		if (method_exists($this, 'getOperator')) {
+		if (method_exists($this, 'getProvider')) {
 			$operator = call_user_func_array(
-				[$this, 'getOperator'], array()
+				[$this, 'getProvider'], array()
 			);
 			if (method_exists($operator, 'getDefaultLanguage')) {
 				if ($operator->getDefaultLanguage()) {
