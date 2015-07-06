@@ -20,7 +20,7 @@ trait TranslatableMethods
 					$methodArray[0] = 'get' . ucfirst($methodArray[0]);
 				}
 				return call_user_func_array(
-					[$this->translate(), $methodArray[0]],
+					[$this->translate($methodArray[2]), $methodArray[0]],
 					$arguments
 				);
 			}
