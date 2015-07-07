@@ -6,8 +6,8 @@ namespace BrauneDigital\TranslationBaseBundle\Model\Translatable;
 trait TranslatableMethods
 {
 
-    protected function proxyCurrentLocaleTranslation($method, array $arguments = array())
-    {
+	protected function proxyCurrentLocaleTranslation($method, array $arguments = array())
+	{
 
 		/**
 		 *
@@ -31,40 +31,46 @@ trait TranslatableMethods
 		 */
 		if ($method == 'slug' || $method == 'getSlug') {
 			$slug = $this->translate()->getSlug();
+
 			if ($slug) {
 				return $slug;
 			} else {
 				$defaultLocale = $this->translate($this->getDefaultLocale())->getSlug();
+
 				if ($defaultLocale) {
 					return $defaultLocale;
 				}
 			}
+			$this->translate()->generateSlug();
+			if ($this->translate()->getSlug()) {
+				return $this->translate()->getSlug();
+			}
 			return $this->getId();
 		}
 
-        /**
-         * No Fallback for Seo Description
-         */
-        if ($method == 'seodescription' || $method == 'getSeoDescription') {
-            $valueByCurrentLocale = $this->findTranslationByLocale($this->getCurrentLocale());
-            if ($valueByCurrentLocale) {
-                return $valueByCurrentLocale->getSeoDescription();
-            } else {
-                return null;
-            }
-        }
+		/**
+		 * No Fallback for Seo Description
+		 */
+		if ($method == 'seodescription' || $method == 'getSeoDescription') {
+			$valueByCurrentLocale = $this->findTranslationByLocale($this->getCurrentLocale());
+			if ($valueByCurrentLocale) {
+				return $valueByCurrentLocale->getSeoDescription();
+			} else {
+				return null;
+			}
+		}
 
-        /**
-         * No Fallback for Seo Tags
-         */
-        if ($method == 'seotags' || $method == 'getSeoTags') {
-            $valueByCurrentLocale = $this->findTranslationByLocale($this->getCurrentLocale());
-            if ($valueByCurrentLocale) {
-                return $valueByCurrentLocale->getSeoTags();
-            } else {
-                return null;
-            }
-        }
+		/**
+		 * No Fallback for Seo Tags
+		 */
+		if ($method == 'seotags' || $method == 'getSeoTags') {
+			$valueByCurrentLocale = $this->findTranslationByLocale($this->getCurrentLocale());
+			if ($valueByCurrentLocale) {
+				return $valueByCurrentLocale->getSeoTags();
+			} else {
+				return null;
+			}
+		}
 
 		if (substr($method, 0, 3) == 'set') {
 			return call_user_func_array(
@@ -107,7 +113,7 @@ trait TranslatableMethods
 		}
 
 		return $defaultLocaleTranslation;
-    }
+	}
 
 	public function getFallbackLocale()
 	{
