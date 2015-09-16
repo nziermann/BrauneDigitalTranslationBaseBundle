@@ -2,7 +2,7 @@ services:
     sonata.admin.braunedigital.translationbase.language:
         class: BrauneDigital\TranslationBaseBundle\Admin\LanguageAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Escape Gamer", label: "Sprachen" }
+            - { name: sonata.admin, manager_type: orm, group: "Localization", label: "Sprachen" }
         arguments:
             - ~
             - BrauneDigital\TranslationBaseBundle\Entity\Language

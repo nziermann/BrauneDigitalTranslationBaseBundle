@@ -30,7 +30,12 @@ class LanguageAdmin extends TranslationAdmin
 			), array(
 				'label' => ''
 			))
-			->add('enabled', null, array('label' => 'Enabled'))
+            ->add('code', null, array(
+                'label' => 'Code'
+            ))
+			->add('enabled', null, array(
+                'label' => 'Enabled'
+            ))
         ;
     }
 

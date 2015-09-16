@@ -33,7 +33,7 @@ class Language
 	/**
 	 * @var int
 	 */
-	private $enabled = 0;
+	private $enabled = false;
 
     /**
      * Get id
