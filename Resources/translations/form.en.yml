@@ -1,0 +1,4 @@
+braune_digital_translations:
+    translations: translations
+    translation_exists: Exists
+    translation_does_not_exist: Does not exist
