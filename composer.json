@@ -13,7 +13,8 @@
         "MIT"
     ],
     "require" : {
-        "knplabs/doctrine-behaviors": "1.2.0"
+        "knplabs/doctrine-behaviors": "1.2.0",
+        "a2lix/translation-form-bundle": "2.0.4"
     },
     "autoload" : {
         "psr-4" : {
