@@ -13,6 +13,7 @@
         "MIT"
     ],
     "require" : {
+        "knplabs/doctrine-behaviors": "1.2.0"
     },
     "autoload" : {
         "psr-4" : {
