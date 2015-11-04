@@ -14,7 +14,8 @@
     ],
     "require" : {
         "knplabs/doctrine-behaviors": "1.2.0",
-        "a2lix/translation-form-bundle": "2.0.4"
+        "a2lix/translation-form-bundle": "2.0.4",
+        "egeloen/ckeditor-bundle": "2.5.2"
     },
     "autoload" : {
         "psr-4" : {
