@@ -1,0 +1,69 @@
+{% extends "SonataAdminBundle:standard_layout.html.twig" %}
+
+ {% block sonata_page_content_nav %}
+     {% if _tab_menu is not empty or _actions is not empty %}
+         <nav class="navbar navbar-default" role="navigation">
+             {% block tab_menu_navbar_header %}
+                 {% if _navbar_title is not empty %}
+                     <div class="navbar-header">
+                         <span class="navbar-brand">{{ _navbar_title|raw }}</span>
+                     </div>
+                 {% endif %}
+             {% endblock %}
+             <div class="container-fluid">
+                 <div class="navbar-left">
+                     {% if _tab_menu is not empty %}
+                         {{ _tab_menu|raw }}
+                     {% endif %}
+                 </div>
+
+                 {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
+                     <ul class="nav navbar-nav navbar-right">
+                         <li class="dropdown sonata-actions">
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'link_actions'|trans({}, 'SonataAdminBundle') }} <b class="caret"></b></a>
+                             <ul class="dropdown-menu" role="menu">
+                                 {{ _actions|raw }}
+                             </ul>
+                         </li>
+                         {% if admin.translations is defined and admin.translations|length > 0 %}
+                             <li class="dropdown sonata-actions">
+                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                     {% trans from "form" %}braune_digital_translations.translations{% endtrans %} ({% if app.request.get('object_locale') %}{{ app.request.get('object_locale') }}{% else %}en{% endif %})
+                                     <b class="caret"></b>
+                                 </a>
+                                 <ul class="dropdown-menu" role="menu">
+                                     {% for translation in admin.translations %}
+                                         <li>
+                                             {% if translation.entity is defined %}
+                                                 {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'object_locale': translation.locale})) %}
+                                                 <a href="{{ currentPath }}" title="{{ translation.entity.title }}">
+                                                     {% if app.request.get('object_locale') == translation.locale and 'en' != translation.locale %}
+                                                         <strong>
+                                                             {{ translation.entity.title }}
+                                                         </strong>
+                                                     {% elseif (app.request.get('object_locale') is null and 'en' == translation.locale ) or (app.request.get('object_locale') == 'en' and 'en' == translation.locale) %}
+                                                         <strong>
+                                                             {{ translation.entity.title }}
+                                                         </strong>
+                                                     {% else %}
+                                                         {{ translation.entity.title }}
+                                                     {% endif %}
+                                                     {% if translation.exists %}
+                                                         ({% trans from "form" %}braune_digital_translations.translation_exists{% endtrans %})
+                                                     {% else %}
+                                                         ({% trans from "form" %}braune_digital_translations.translation_does_not_exist{% endtrans %})
+                                                     {% endif %}
+                                                 </a>
+                                             {% endif %}
+                                         </li>
+                                     {% endfor %}
+                                 </ul>
+                             </li>
+                         {% endif %}
+                     </ul>
+                 {% endif %}
+
+             </div>
+         </nav>
+     {% endif %}
+ {% endblock sonata_page_content_nav %}
