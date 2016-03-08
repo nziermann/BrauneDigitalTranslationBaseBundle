@@ -20,8 +20,19 @@ class BrauneDigitalTranslationBaseExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+
+        $config = $this->processConfiguration($configuration, $configs);
+
+        if($config['admin']) {
+            $loader->load('admin.yml');
+        }
+
+        if($config['routing']) {
+            $loader->load('routing_services.yml');
+            //inject as main router:
+            $container->removeAlias('router');
+            $container->addAliases(array('router' => 'braune_digital.translation_base.routing.service_router'));
+        }
     }
 }
