@@ -3,10 +3,8 @@
 namespace BrauneDigital\TranslationBaseBundle\Routing;
 
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Yaml\Exception\ParseException;
 
 class YamlLocalizedLoader extends YamlFileLoader {
 
@@ -61,8 +59,7 @@ class YamlLocalizedLoader extends YamlFileLoader {
         }
 
         $config['requirements'] = $requirements;
-
-
+        
         $options = isset($config['options']) ? $config['options'] : array();
 
         if(!array_key_exists('compiler_class', $requirements)) {

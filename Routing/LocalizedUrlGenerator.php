@@ -5,7 +5,6 @@ namespace BrauneDigital\TranslationBaseBundle\Routing;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 
 class LocalizedUrlGenerator extends UrlGenerator {
@@ -14,8 +13,7 @@ class LocalizedUrlGenerator extends UrlGenerator {
     protected $defaultLocale;
     protected $localeKey = '_locale';
 
-    public function __construct(RequestContext $context, $logger, $locales = array('en'), $defaultLocale = 'en') {
-        $this->context = $context;
+    public function __construct($logger, $locales = array('en'), $defaultLocale = 'en') {
         $this->logger = $logger;
         $this->locales = $locales;
         $this->defaultLocale = $defaultLocale;

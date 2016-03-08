@@ -42,7 +42,9 @@ class ServiceRouter extends Router
         $this->matcher = $matcher;
 
         $this->generator->setRoutes($this->getRouteCollection());
+        $this->generator->setContext($this->getContext());
         $this->matcher->setRoutes($this->getRouteCollection());
+        $this->matcher->setContext($this->getContext());
     }
 
     /**
