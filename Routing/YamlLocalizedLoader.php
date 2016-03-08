@@ -59,7 +59,7 @@ class YamlLocalizedLoader extends YamlFileLoader {
         }
 
         $config['requirements'] = $requirements;
-        
+
         $options = isset($config['options']) ? $config['options'] : array();
 
         if(!array_key_exists('compiler_class', $requirements)) {
