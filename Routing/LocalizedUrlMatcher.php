@@ -2,11 +2,11 @@
 
 namespace BrauneDigital\TranslationBaseBundle\Routing;
 
-use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Bundle\FrameworkBundle\Routing\RedirectableUrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 
-class LocalizedUrlMatcher extends UrlMatcher {
+class LocalizedUrlMatcher extends RedirectableUrlMatcher {
 
     protected $locales;
     protected $defaultLocale;

@@ -30,6 +30,7 @@ class BrauneDigitalTranslationBaseExtension extends Extension
 
         if($config['routing']) {
             $loader->load('routing_services.yml');
+            
             //inject as main router:
             $container->removeAlias('router');
             $container->addAliases(array('router' => 'braune_digital.translation_base.routing.service_router'));
