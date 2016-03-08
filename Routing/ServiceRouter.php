@@ -3,9 +3,7 @@
 namespace BrauneDigital\TranslationBaseBundle\Routing;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Config\ConfigCacheInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Routing\Generator\ConfigurableRequirementsInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\RequestContext;

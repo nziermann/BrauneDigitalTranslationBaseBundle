@@ -33,7 +33,7 @@ class BrauneDigitalTranslationBaseExtension extends Extension
             $container->removeAlias('router');
             $container->addAliases(array('router' => 'braune_digital.translation_base.routing.service_router'));
         }
-        
+
         if($config['admin'] && isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.yml');
         }
