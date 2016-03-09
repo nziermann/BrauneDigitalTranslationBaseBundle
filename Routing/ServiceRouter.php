@@ -10,16 +10,6 @@ use Symfony\Component\Routing\RequestContext;
 
 class ServiceRouter extends Router
 {
-    /**
-     * @var array
-     */
-    protected $locales;
-
-    /**
-     * @var string
-     */
-    protected $defaultLocale;
-
     protected $matcher;
 
     protected $generator;
