@@ -29,6 +29,7 @@ class BrauneDigitalTranslationBaseExtension extends Extension
 
         if($config['routing']) {
             $loader->load('routing_services.yml');
+            $container->setParameter('braune_digital.translation_base.use_routing', true);
         }
 
         if($config['admin'] && isset($bundles['SonataAdminBundle'])) {
