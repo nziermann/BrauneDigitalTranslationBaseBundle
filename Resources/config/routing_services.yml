@@ -3,12 +3,6 @@ parameters:
     braune_digital.translation_base.routing.default_locale: "%locale%"
 
 services:
-    braune_digital.translation_base.routing.loader.yaml:
-        class: "BrauneDigital\\TranslationBaseBundle\\Routing\\YamlLocalizedLoader"
-        arguments: ["@file_locator", "%braune_digital.translation_base.routing.locales%"]
-        tags:
-            - { name: routing.loader }
-
     braune_digital.translation_base.routing.generator:
         class: "BrauneDigital\\TranslationBaseBundle\\Routing\\LocalizedUrlGenerator"
         arguments:
@@ -24,9 +18,17 @@ services:
 
     braune_digital.translation_base.routing.service_router:
         class: "BrauneDigital\\TranslationBaseBundle\\Routing\\ServiceRouter"
+        tags:
+            - {name: "monolog.logger", channel: "router"}
         arguments:
             - "@service_container"
             - "%router.resource%"
             - "@router.request_context"
             - "@braune_digital.translation_base.routing.generator"
             - "@braune_digital.translation_base.routing.matcher"
+
+    braune_digital.translation_base.routing.loader.yaml:
+        class: "BrauneDigital\\TranslationBaseBundle\\Routing\\YamlLocalizedLoader"
+        arguments: ["@file_locator", "%braune_digital.translation_base.routing.locales%"]
+        tags:
+            - { name: routing.loader }
