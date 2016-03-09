@@ -200,11 +200,13 @@ class LocalizedRouteCompiler implements RouteCompilerInterface
                 return sprintf('%s(?P<%s>%s)?', preg_quote($token[1], self::REGEX_DELIMITER), $token[3], $token[2]);
             } else {
 
+                $basePattern = '%s(?P<%s>%s)';
+
                 if($token[3] == '_locale') {
-                    $regexp = sprintf('(%s(?P<%s>%s))?', preg_quote($token[1], self::REGEX_DELIMITER), $token[3], $token[2]);
-                } else {
-                    $regexp = sprintf('%s(?P<%s>%s)', preg_quote($token[1], self::REGEX_DELIMITER), $token[3], $token[2]);
+                    $basePattern = '(%s(?P<%s>%s))?';
                 }
+
+                $regexp = sprintf($basePattern, preg_quote($token[1], self::REGEX_DELIMITER), $token[3], $token[2]);
 
                 if ($index >= $firstOptional) {
                     // Enclose each optional token in a subpattern to make it optional.
