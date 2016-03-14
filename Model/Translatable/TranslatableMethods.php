@@ -147,11 +147,10 @@ trait TranslatableMethods
 
 	/**
 	 * @param $name
-	 * proxy getter for translation values
+	 * generic translation
 	 * @return mixed
 	 */
-	public function __get($name) {
-
+	public function translateProperty($name) {
 		$functionName = 'get' . ucfirst($name);
 		$value = $this->translate()->$functionName();
 
@@ -160,5 +159,13 @@ trait TranslatableMethods
 		} else {
 			return $this->translate($this->getDefaultLocale())->$functionName();
 		}
+	}
+	/**
+	 * @param $name
+	 * proxy getter for translation values
+	 * @return mixed
+	 */
+	public function __get($name) {
+		return $this->translateProperty($name);
 	}
 }
