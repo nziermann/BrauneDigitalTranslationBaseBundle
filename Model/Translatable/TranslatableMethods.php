@@ -144,4 +144,21 @@ trait TranslatableMethods
 	{
 		$this->newTranslations = $newTranslations;
 	}
+
+	/**
+	 * @param $name
+	 * proxy getter for translation values
+	 * @return mixed
+	 */
+	public function __get($name) {
+
+		$functionName = 'get' . ucfirst($name);
+		$value = $this->translate()->$functionName();
+
+		if ($value) {
+			return $value;
+		} else {
+			return $this->translate($this->getDefaultLocale())->$functionName();
+		}
+	}
 }
