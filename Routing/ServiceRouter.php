@@ -11,8 +11,12 @@ use Symfony\Component\Routing\RequestContext;
 class ServiceRouter extends Router
 {
     protected $matcher;
+    protected $matcherId;
 
     protected $generator;
+    protected $generatorId;
+
+    protected $container;
 
     /**
      * ServiceRouter constructor.
@@ -24,15 +28,11 @@ class ServiceRouter extends Router
      * @param UrlGeneratorInterface $generator
      * @param UrlMatcherInterface   $matcher
      */
-    public function __construct(ContainerInterface $container, $resource, RequestContext $context, LocalizedUrlGenerator $generator, LocalizedUrlMatcher $matcher) {
+    public function __construct(ContainerInterface $container, $resource, RequestContext $context, $generatorId, $matcherId) {
         parent::__construct($container, $resource, array(), $context);
-        $this->generator = $generator;
-        $this->matcher = $matcher;
-
-        $this->generator->setRoutes($this->getRouteCollection());
-        $this->generator->setContext($this->getContext());
-        $this->matcher->setRoutes($this->getRouteCollection());
-        $this->matcher->setContext($this->getContext());
+        $this->container = $container;
+        $this->generatorId = $generatorId;
+        $this->matcherId = $matcherId;
     }
 
     /**
@@ -41,6 +41,13 @@ class ServiceRouter extends Router
      * @return UrlGeneratorInterface A UrlGeneratorInterface instance
      */
     public function getGenerator()    {
+
+        if($this->generator == null) {
+            $this->generator = $this->container->get($this->generatorId);
+            $this->generator->setRoutes($this->getRouteCollection());
+            $this->generator->setContext($this->getContext());
+        }
+
         return $this->generator;
     }
 
@@ -50,6 +57,13 @@ class ServiceRouter extends Router
      * @return UrlMatcherInterface A UrlMatcherInterface instance
      */
     public function getMatcher() {
+
+        if($this->matcher == null) {
+            $this->matcher = $this->container->get($this->matcherId);
+            $this->matcher->setRoutes($this->getRouteCollection());
+            $this->matcher->setContext($this->getContext());
+        }
+
         return $this->matcher;
     }
 

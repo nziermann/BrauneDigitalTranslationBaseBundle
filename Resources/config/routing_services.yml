@@ -24,8 +24,8 @@ services:
             - "@service_container"
             - "%router.resource%"
             - "@router.request_context"
-            - "@braune_digital.translation_base.routing.generator"
-            - "@braune_digital.translation_base.routing.matcher"
+            - "braune_digital.translation_base.routing.generator"
+            - "braune_digital.translation_base.routing.matcher"
 
     braune_digital.translation_base.routing.loader.yaml:
         class: "BrauneDigital\\TranslationBaseBundle\\Routing\\YamlLocalizedLoader"

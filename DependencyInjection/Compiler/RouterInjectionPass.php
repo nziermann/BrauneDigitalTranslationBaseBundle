@@ -18,6 +18,9 @@ class RouterInjectionPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container) {
         if($container->hasParameter('braune_digital.translation_base.use_routing') && $container->getParameter('braune_digital.translation_base.use_routing')) {
+            if($container->hasAlias('router')) {
+                $container->removeAlias('router');
+            }
             $container->setAlias('router', 'braune_digital.translation_base.routing.service_router');
         }
     }
