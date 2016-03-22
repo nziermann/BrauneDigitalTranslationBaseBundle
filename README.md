@@ -213,3 +213,4 @@ class EntityAdmin extends TranslationAdmin
 This Bundle also provides a basic Language Entity, which can be managed through SonataAdmin as well.
 ## Todo
 Add requirements with versions in `composer.json`.
+A caching mechanism is needed for the service Router. The Symfony2 router creates own instances and caches them. The service Router however is not able to do that, but maybe a RouteCollection cache would speed things up ;)
