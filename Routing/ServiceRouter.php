@@ -66,9 +66,4 @@ class ServiceRouter extends Router
 
         return $this->matcher;
     }
-
-    //No Warmup needed
-    public function warmUp($cacheDir) {
-
-    }
 }
