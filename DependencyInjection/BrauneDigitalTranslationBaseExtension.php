@@ -20,8 +20,20 @@ class BrauneDigitalTranslationBaseExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $bundles = $container->getParameter('kernel.bundles');
+
+
+        if($config['routing']) {
+            $loader->load('routing_services.yml');
+            $container->setParameter('braune_digital.translation_base.use_routing', true);
+        }
+
+        if($config['admin'] && isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin.yml');
+        }
     }
 }

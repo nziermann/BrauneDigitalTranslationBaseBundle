@@ -2,6 +2,7 @@
 
 namespace BrauneDigital\TranslationBaseBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -18,9 +19,25 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('braunedigital_mail');
+        $rootNode = $treeBuilder->root('braune_digital_translation_base');
 
+        $this->addAdminSection($rootNode);
+        $this->addRoutingSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    /**
+     * @param $rootNode
+     */
+    protected function addAdminSection(ArrayNodeDefinition $rootNode) {
+        $rootNode->children()->booleanNode('admin')->defaultTrue();
+    }
+
+    /**
+     * @param $rootNode
+     */
+    protected function addRoutingSection(ArrayNodeDefinition $rootNode) {
+        $rootNode->children()->booleanNode('routing')->defaultFalse();
     }
 }

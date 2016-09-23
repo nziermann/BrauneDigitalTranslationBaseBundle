@@ -2,7 +2,6 @@
 
 namespace BrauneDigital\TranslationBaseBundle\Form;
 
-use Application\AppBundle\Services\LocaleOptions;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -44,11 +43,7 @@ abstract class TranslationType extends AbstractType
 		$this->container = $container;
 
 		// Get current locale
-		if ($this->request->get('object_locale')) {
-			$this->currentLocale = array($this->request->get('object_locale'));
-		} else {
-			$this->currentLocale = array('en');
-		}
+		$this->currentLocale = $this->request->get('object_locale', $this->container->getParameter('locale'));
 	}
 
 	/**
@@ -72,10 +67,15 @@ abstract class TranslationType extends AbstractType
 	}
 
 	public function getDisabled(FormBuilderInterface $builder) {
-		if (!$builder->getData()->getDefaultLanguage()) {
-			return false;
+		if(method_exists($builder->getData(), 'getDefaultLanguage')) {
+
+			if (!$builder->getData()->getDefaultLanguage()) {
+				return false;
+			}
+			return ($this->currentLocale == $builder->getData()->getDefaultLanguage()->getCode()) ? false : true;
+		} else {
+			return $this->currentLocale !=  $this->container->getParameter('locale');
 		}
-		return ($this->currentLocale[0] == $builder->getData()->getDefaultLanguage()->getCode()) ? false : true;
 	}
 
 	/**
@@ -90,6 +90,4 @@ abstract class TranslationType extends AbstractType
 		$view->vars['currentTranslation'] = $this->container->get('doctrine')->getRepository('BrauneDigitalTranslationBaseBundle:Language')->findOneBy(array('code' => $this->request->get('object_locale')));
 
 	}
-
-
 }
