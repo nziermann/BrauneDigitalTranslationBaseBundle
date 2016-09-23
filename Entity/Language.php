@@ -125,4 +125,34 @@ class Language
 
 
 
+	/**
+	 * An extra feature allows you to proxy translated fields of a translatable entity.
+	 *
+	 * @param string $method
+	 * @param array $arguments
+	 *
+	 * @return mixed The translated value of the field for current locale
+	 */
+	protected function proxyCurrentLocaleTranslation($method, array $arguments = [], $fallback = false)
+	{
+		return call_user_func_array(
+			[$this->translate($this->getCurrentLocale(), $fallback), $method],
+			$arguments
+		);
+	}
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getVirtualTitle() {
+		$value = $this->proxyCurrentLocaleTranslation('getTitle', array(), false);
+		if (!$value) {
+			$value = $this->translate($this->getDefaultLocale())->getTitle();
+		}
+		return $value;
+	}
+
+
+
 }

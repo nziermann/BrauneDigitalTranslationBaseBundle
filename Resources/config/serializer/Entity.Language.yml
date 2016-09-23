@@ -1,0 +1,19 @@
+BrauneDigital\TranslationBaseBundle\Entity\Language:
+    exclusion_policy: ALL
+    read_only: false
+    access_type: public_method
+    virtual_properties:
+        getVirtualTitle:
+            serialized_name: title
+            type: string
+            expose: true
+            groups: ["default"]
+
+    properties:
+        id:
+            expose: true
+            read_only: true
+            groups: ["default"]
+        code:
+            expose: true
+            groups: ["default"]
