@@ -171,7 +171,7 @@ class EntityAdmin extends TranslationAdmin
 
         $formMapper
             ->with('Localization')
-			->add('translations', 'a2lix_translations', array(
+			->add('translations', TranslationsType::class, array(
                 'locales' => $this->currentLocale,
                 'required_locales' => $this->currentLocale,
 				'fields' => array(

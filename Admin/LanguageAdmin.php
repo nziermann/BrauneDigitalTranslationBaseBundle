@@ -2,6 +2,7 @@
 
 namespace BrauneDigital\TranslationBaseBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -17,7 +18,7 @@ class LanguageAdmin extends TranslationAdmin
 		$this->buildTranslations($this->subject);
 
         $formMapper
-			->add('translations', 'a2lix_translations', array(
+			->add('translations', TranslationsType::class, array(
                 'locales' => $this->currentLocale,
                 'required_locales' => $this->currentLocale,
 				'fields' => array(

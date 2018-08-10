@@ -78,7 +78,8 @@ class Language
 		if ($name) {
 			return $name;
 		} else {
-			return $this->translate($this->getDefaultLocale())->getTitle();
+		    $name = $this->translate($this->getDefaultLocale())->getTitle();
+			return ($name !== null) ? $name : '';
 		}
 
 	}
